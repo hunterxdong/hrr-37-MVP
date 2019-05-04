@@ -1,0 +1,42 @@
+{
+	"name": "hrr-37-mvp",
+	"version": "1.0.0",
+	"description": "mvp",
+	"main": "index.js",
+	"scripts": {
+		"build": "webpack -d --watch",
+		"run": "nodemon server/index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hunterxdong/hrr-37-MVP.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/hunterxdong/hrr-37-MVP/issues"
+	},
+	"homepage": "https://github.com/hunterxdong/hrr-37-MVP#readme",
+	"dependencies": {
+		"@babel/core": "^7.4.4",
+		"@babel/plugin-proposal-class-properties": "^7.4.4",
+		"@babel/preset-env": "^7.4.4",
+		"@babel/preset-react": "^7.0.0",
+		"axios": "^0.18.0",
+		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.3",
+		"babel-loader": "^8.0.5",
+		"body-parser": "^1.19.0",
+		"express": "^4.16.4",
+		"jquery": "^3.4.1",
+		"pg": "^7.10.0",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"webpack": "^4.30.0",
+		"webpack-dev-server": "^3.3.1"
+	},
+	"devDependencies": {
+		"webpack-cli": "^3.3.1"
+	}
+}

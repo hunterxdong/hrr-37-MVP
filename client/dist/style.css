@@ -1,0 +1,71 @@
+body {
+	text-align: center;
+	background-image: url('https://media1.tenor.com/images/ec5709ce0daaa89930a15d85e0325abc/tenor.gif?itemid=4787874');
+}
+
+.deleteMe {
+	float: right;
+	color: red;
+}
+
+.money {
+	font-family: Impact, Charcoal, sans-serif;
+	color: white;
+	font-size: 100px;
+	-webkit-text-stroke: 4px black;
+	font-weight: bold;
+}
+
+.container-data {
+	background: white;
+	font-family: Impact, Charcoal, sans-serif;
+	font-size: 100px;
+	-webkit-text-stroke: 4px black;
+	font-weight: bold;
+	opacity: 0.7;
+}
+.total {
+	background: white;
+	font-family: Impact, Charcoal, sans-serif;
+	font-size: 100px;
+	-webkit-text-stroke: 4px black;
+	font-weight: bold;
+	opacity: 0.7;
+}
+
+.total-owed {
+	background: white;
+	font-family: Impact, Charcoal, sans-serif;
+	font-size: 100px;
+	-webkit-text-stroke: 4px black;
+	font-weight: bold;
+	opacity: 0.7;
+}
+
+.input-key {
+	width: 300px;
+	height: 50px;
+	font-size: 50px;
+}
+.input-value {
+	width: 400px;
+	height: 50px;
+	font-size: 50px;
+}
+.btn-add {
+	border-radius: 8px;
+	width: 300px;
+	height: 60px;
+	font-size: 50px;
+	color: white;
+	background-color: green;
+}
+
+.btn-clear {
+	border-radius: 8px;
+	width: 300px;
+	height: 60px;
+	font-size: 50px;
+	color: white;
+	background-color: red;
+}
