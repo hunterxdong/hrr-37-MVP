@@ -19,6 +19,11 @@ class App extends React.Component {
 	componentDidMount() {
 		axios.get(`/api/debts`).then(response => {
 			this.setState({ who: response.data });
+			var totalNums = 0;
+			for (var i = 0; i < response.data.length; i++) {
+				totalNums += response.data[i].amount;
+			}
+			this.setState({ total: totalNums });
 		});
 	}
 	//send a get request to the database to populate the react dom
@@ -115,9 +120,9 @@ class App extends React.Component {
 						<button className="btn-clear" onClick={this.absolveAll.bind(this)}>
 							Absolve All
 						</button>
-						<TotalsModal data={this.state.who} />
-						<div className="total-owed">Total $: {this.state.total}</div>
 					</form>
+					<TotalsModal data={this.state.who} />
+					<div className="total-owed">Total $: {this.state.total}</div>
 				</div>
 				{this.state.who.map(data => (
 					<Items
