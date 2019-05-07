@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Items from './components/Items.jsx';
+import TotalsModal from './components/TotalsModal.jsx';
+import axios from 'axios';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -13,6 +15,11 @@ class App extends React.Component {
 			delIndex: 0,
 			who: []
 		};
+	}
+	componentDidMount() {
+		axios.get(`/api/debts`).then(response => {
+			this.setState({ who: response.data });
+		});
 	}
 	//send a get request to the database to populate the react dom
 	deleteOne = function(num) {
@@ -30,6 +37,7 @@ class App extends React.Component {
 	};
 	clickAddButton = function() {
 		//this.setState({ total: this.state.total + 1 });
+		event.preventDefault();
 		var keyData = $('.input-key').val();
 		var valueData = $('.input-value').val();
 		var whyData = $('.input-why').val();
@@ -59,24 +67,44 @@ class App extends React.Component {
 		this.state.who.push(newObj);
 		this.setState({ who: this.state.who });
 		this.setState({ index: this.state.index + 1 });
+		document.getElementById('input1').value = '';
+		document.getElementById('input2').value = '';
+		document.getElementById('input3').value = '';
+		axios.post(`/api/add/`);
 	};
 	absolveAll = function() {
-		this.setState({ total: 0, who: [] });
-		alert('please enter credit card info');
+		if (confirm('Are you sure?')) {
+			this.setState({ total: 0, who: [] });
+		}
+		// alert('please enter credit card info');
 	};
 	render() {
 		return (
 			<div>
 				<div className="container-main">
 					<header className="money">Who's got ME Money?!</header>
-					<div className="container-form">
-						<input type="text" className="input-key" placeholder="WHO?" />
+					<form
+						className="container-form"
+						onSubmit={this.clickAddButton.bind(this)}
+					>
+						<input
+							type="text"
+							className="input-key"
+							placeholder="WHO?"
+							id="input3"
+						/>
 						<input
 							type="number"
 							className="input-value"
 							placeholder="HOW MUCH!?!"
+							id="input2"
 						/>
-						<input type="text" className="input-why" placeholder="FOR WHAT?" />
+						<input
+							type="text"
+							className="input-why"
+							id="input1"
+							placeholder="FOR WHAT?"
+						/>
 						<br />
 						<button
 							className="btn-add"
@@ -87,8 +115,9 @@ class App extends React.Component {
 						<button className="btn-clear" onClick={this.absolveAll.bind(this)}>
 							Absolve All
 						</button>
+						<TotalsModal data={this.state.who} />
 						<div className="total-owed">Total $: {this.state.total}</div>
-					</div>
+					</form>
 				</div>
 				{this.state.who.map(data => (
 					<Items
