@@ -7,13 +7,13 @@ class Items extends React.Component {
 		this.state = {};
 	}
 	clickX() {
-        this.props.del(this.props.index);
+		this.props.del(this.props.id);
 	}
 	render() {
 		return (
 			<div>
 				<div className="container-data">
-                    {this.props.name} owes you {this.props.amount} for {this.props.why} 
+					{this.props.name} owes you {this.props.amount} for {this.props.why}
 					<div className="deleteMe" onClick={this.clickX.bind(this)}>
 						X
 					</div>

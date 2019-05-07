@@ -25,9 +25,9 @@ var getAllDebt = function(callback) {
 
 var addDebt = function(data, callback) {
 	pool.query(
-		`insert into money(name, why, amount) values ('${data.name}','${data.why}',${
-			data.amount
-		})`,
+		`insert into money(name, why, amount) values ('${data.name}','${
+			data.why
+		}',${data.amount})`,
 		function(err, result) {
 			if (err) {
 				console.log(err);
@@ -38,9 +38,33 @@ var addDebt = function(data, callback) {
 	);
 };
 
-var deleteDebt = function() {};
+var absolveAll = function(data, callback) {
+	pool.query(`delete from money`),
+		function(err, result) {
+			if (err) {
+				console.log(err);
+			} else {
+				callback(null, result);
+			}
+		};
+};
+
+var absolveOne = (data, callback) => {
+	pool.query('DELETE FROM money WHERE id = $1', [data.id], function(
+		err,
+		result
+	) {
+		if (err) {
+			console.log(err);
+		} else {
+			callback(null, result);
+		}
+	});
+};
 
 module.exports = {
 	getAllDebt,
-	addDebt
+	addDebt,
+	absolveAll,
+	absolveOne
 };

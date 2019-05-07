@@ -38,7 +38,7 @@ class TotalsModal extends React.Component {
 		return (
 			<div>
 				<button className="btn-show" onClick={this.toggle.bind(this)}>
-					Show Debtors
+					WHO? WHAT?
 				</button>
 				<Modal isOpen={this.state.modalstate} ariaHideApp={false}>
 					<div className="closeModal" onClick={this.toggle.bind(this)}>
@@ -50,7 +50,6 @@ class TotalsModal extends React.Component {
 						))}
 					</div>
 				</Modal>
-				/>
 			</div>
 		);
 	}

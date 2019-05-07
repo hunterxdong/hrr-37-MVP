@@ -32,4 +32,25 @@ app.post('/api/add', (req, res) => {
 	// console.log(req.body);
 });
 
+app.delete('/api/absolve', (req, res) => {
+	db.absolveAll(function(err, result) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send('Got a DELETE request at /api/absolve');
+		}
+	});
+});
+
+app.post(`/api/delete`, (req, res) => {
+	console.log(req.body);
+	db.absolveOne(req.body, function(err, result) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.status(200).send(`deleted`);
+		}
+	});
+});
+
 app.listen(port, () => console.log(`listening on port ${port}!`));

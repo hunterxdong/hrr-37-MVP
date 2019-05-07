@@ -11,34 +11,42 @@ class App extends React.Component {
 			total: 0,
 			keyData: '',
 			valueData: 0,
-			index: 0,
-			delIndex: 0,
 			who: []
 		};
 	}
 	componentDidMount() {
-		axios.get(`/api/debts`).then(response => {
-			this.setState({ who: response.data });
-			var totalNums = 0;
-			for (var i = 0; i < response.data.length; i++) {
-				totalNums += response.data[i].amount;
-			}
-			this.setState({ total: totalNums });
-		});
+		axios
+			.get(`/api/debts`)
+			.then(response => {
+				this.setState({ who: response.data });
+				var totalNums = 0;
+				for (var i = 0; i < response.data.length; i++) {
+					totalNums += response.data[i].amount;
+				}
+				this.setState({ total: totalNums });
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	}
 	//send a get request to the database to populate the react dom
 	deleteOne = function(num) {
-		var newArr = this.state.who.slice(0);
-		var holder;
-		this.setState({ delIndex: num });
-		for (var i = 0; i < newArr.length; i++) {
-			if (newArr[i].index === this.state.delIndex) {
-				holder = parseInt(newArr[i].amount);
-				this.setState({ total: parseInt(this.state.total) - holder });
-				newArr.splice(i, 1);
-			}
-		}
-		this.setState({ who: newArr });
+		axios.post(`/api/delete`, { id: num }).catch(error => {
+			console.log(error);
+		});
+		axios
+			.get(`/api/debts`)
+			.then(response => {
+				this.setState({ who: response.data });
+				var totalNums = 0;
+				for (var i = 0; i < response.data.length; i++) {
+					totalNums += response.data[i].amount;
+				}
+				this.setState({ total: totalNums });
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	};
 	clickAddButton = function() {
 		//this.setState({ total: this.state.total + 1 });
@@ -87,6 +95,7 @@ class App extends React.Component {
 	absolveAll = function() {
 		if (confirm('Are you sure?')) {
 			this.setState({ total: 0, who: [] });
+			axios.delete(`/api/absolve`);
 		}
 		// alert('please enter credit card info');
 	};
@@ -95,10 +104,7 @@ class App extends React.Component {
 			<div>
 				<div className="container-main">
 					<header className="money">Who's got ME Money?!</header>
-					<form
-						className="container-form"
-						onSubmit={this.clickAddButton.bind(this)}
-					>
+					<form className="container-form">
 						<input
 							type="text"
 							className="input-key"
@@ -121,6 +127,7 @@ class App extends React.Component {
 						<button
 							className="btn-add"
 							onClick={this.clickAddButton.bind(this)}
+							onSubmit={this.clickAddButton.bind(this)}
 						>
 							Submit
 						</button>
@@ -136,7 +143,7 @@ class App extends React.Component {
 						name={data.name}
 						amount={data.amount}
 						why={data.why}
-						index={data.index}
+						id={data.id}
 						del={this.deleteOne.bind(this)}
 					/>
 				))}
