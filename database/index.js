@@ -25,7 +25,7 @@ var getAllDebt = function(callback) {
 
 var addDebt = function(data, callback) {
 	pool.query(
-		`insert into money(name, why, amount) values (${data.name},${data.why},${
+		`insert into money(name, why, amount) values ('${data.name}','${data.why}',${
 			data.amount
 		})`,
 		function(err, result) {

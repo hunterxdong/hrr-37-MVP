@@ -21,13 +21,15 @@ app.get('/api/debts', (req, res) => {
 });
 
 app.post('/api/add', (req, res) => {
-	db.addDebt(res.body, function(err, result) {
+	db.addDebt(req.body, function(err, result) {
+		console.log(res.body);
 		if (err) {
 			console.log(err);
 		} else {
 			res.status(200).json(result);
 		}
 	});
+	// console.log(req.body);
 });
 
 app.listen(port, () => console.log(`listening on port ${port}!`));

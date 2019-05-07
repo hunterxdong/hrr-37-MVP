@@ -72,10 +72,17 @@ class App extends React.Component {
 		this.state.who.push(newObj);
 		this.setState({ who: this.state.who });
 		this.setState({ index: this.state.index + 1 });
+		axios
+			.post(`/api/add`, newObj)
+			.then(function(response) {
+				console.log(response);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
 		document.getElementById('input1').value = '';
 		document.getElementById('input2').value = '';
 		document.getElementById('input3').value = '';
-		axios.post(`/api/add/`);
 	};
 	absolveAll = function() {
 		if (confirm('Are you sure?')) {
